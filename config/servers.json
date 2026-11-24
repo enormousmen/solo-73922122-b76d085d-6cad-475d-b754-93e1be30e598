@@ -1,0 +1,14 @@
+{
+  "branch": {
+    "name": "A-01",
+    "limit_amps": 100.0
+  },
+  "receipt_timeout_seconds": 3.0,
+  "pdu_base_url": "http://localhost:9000",
+  "servers": [
+    { "id": "srv-1", "peak_amps": 30.0, "stable_amps": 12.0 },
+    { "id": "srv-2", "peak_amps": 30.0, "stable_amps": 12.0 },
+    { "id": "srv-3", "peak_amps": 40.0, "stable_amps": 15.0 },
+    { "id": "srv-4", "peak_amps": 25.0, "stable_amps": 10.0 }
+  ]
+}

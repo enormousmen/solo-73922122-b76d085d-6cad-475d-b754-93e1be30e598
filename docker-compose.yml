@@ -1,0 +1,26 @@
+services:
+  pdu:
+    build: ./pdu
+    environment:
+      # normal | lost-receipt | fail | flaky
+      PDU_DEFAULT_MODE: normal
+      # 合闸后多少秒 /pdu/status 才报告 stable=true
+      PDU_BOOT_SECONDS: "5"
+      PDU_RECEIPT_DELAY: "0.2"
+    ports:
+      - "9000:9000"
+
+  api:
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+    environment:
+      PDU_BASE_URL: http://pdu:9000
+      APP_CONFIG: /srv/config/servers.json
+    volumes:
+      # 改支路容量/服务器电流后重启 api 即可生效，无需重新构建镜像
+      - ./config/servers.json:/srv/config/servers.json:ro
+    ports:
+      - "8000:8000"
+    depends_on:
+      - pdu
